@@ -52,32 +52,27 @@ public class Main {
 
         //functionTests.printArrays();
 
+
+        String programSettingsURL = "C:\\Users\\dazon\\IdeaProjects\\StockDataBacktester\\src\\";
+        //String programSettingsURL = "C:\\Users\\white\\Documents\\School\\CS240\\ExcelTests\\src\\";
+        String homeDirectory = "C:\\Users\\dazon\\Desktop\\MMM\\";
+        //String homeDirectory = "D:\\Stocks\\MMM\\";
+
         System.out.println(TimeCalculation.ConvertTimeIntToString(27901));
 
-
-        TriggerModler triggerModler = new TriggerModler(
-                "C:\\Users\\white\\Documents\\School\\CS240\\ExcelTests\\src\\",
-                "D:\\Stocks\\MMM\\", "output1.csv", "parameters.txt");
+        TriggerModler triggerModler = new TriggerModler(programSettingsURL, homeDirectory, "output1.csv", "parameters.txt");
         triggerModler.runBackTest();
 
-        TriggerModler triggerModler2 = new TriggerModler(
-                "C:\\Users\\white\\Documents\\School\\CS240\\ExcelTests\\src\\",
-                "D:\\Stocks\\MMM\\", "output2.csv", "parameters2.txt");
+        TriggerModler triggerModler2 = new TriggerModler(programSettingsURL, homeDirectory, "output2.csv", "parameters2.txt");
         triggerModler2.runBackTest();
 
-        TriggerModler triggerModler3 = new TriggerModler(
-                "C:\\Users\\white\\Documents\\School\\CS240\\ExcelTests\\src\\",
-                "D:\\Stocks\\MMM\\", "output3.csv", "parameters3.txt");
+        TriggerModler triggerModler3 = new TriggerModler(programSettingsURL, homeDirectory, "output3.csv", "parameters3.txt");
         triggerModler3.runBackTest();
 
-        TriggerModler triggerModler4 = new TriggerModler(
-                "C:\\Users\\white\\Documents\\School\\CS240\\ExcelTests\\src\\",
-                "D:\\Stocks\\MMM\\", "output4.csv", "parameters4.txt");
+        TriggerModler triggerModler4 = new TriggerModler(programSettingsURL, homeDirectory, "output4.csv", "parameters4.txt");
         triggerModler4.runBackTest();
 
-        TriggerModler triggerModler5 = new TriggerModler(
-                "C:\\Users\\white\\Documents\\School\\CS240\\ExcelTests\\src\\",
-                "D:\\Stocks\\MMM\\", "output5.csv", "parameters5.txt");
+        TriggerModler triggerModler5 = new TriggerModler(programSettingsURL, homeDirectory, "output5.csv", "parameters5.txt");
         triggerModler5.runBackTest();
 
         System.out.println("asdf");
