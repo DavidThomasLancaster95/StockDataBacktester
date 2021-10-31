@@ -1,0 +1,4 @@
+symbol,time,price,volumeDay,volumeSecond,PCI,volumeMinute,4% - 2%,priceSpread30MinutePCIPre5,2% - 1%,firstHourLow,tickMinute,PCIMinute,volume30MinutesBefore5,tick30MinutesBefore5,markD,priceSpread30MinutePCIPre5,
+tick15Second,30,9999
+tick30MinutesBefore5,0,5
+volume15Second,100000,99999999

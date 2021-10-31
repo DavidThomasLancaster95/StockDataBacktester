@@ -1,0 +1,44 @@
+symbol,time,price,volumeDay,volumeSecond,PCI,volumeMinute,4% - 2%,2% - 1%,firstHourLow,tickMinute,PCIMinute,volume30MinutesBefore5,tick30MinutesBefore5,markD,pointHighSum,
+volumeSecond,10000,100000000
+price,1,12
+time,0,24301
+firstHourLow,-1,-1
+volumeMinute,100000,10000000
+PCI,0.005,0.1
+tickMinute,5,1000
+PCIMinute,-0.05,0.05
+volume30MinutesBefore5,0,10000000
+tick30MinutesBefore5,0,1000000
+
+symbol,time,price,volumeDay,volumeSecond,PCI,volumeMinute,4% - 2%,2% - 1%,firstHourLow,tickMinute,PCIMinute,volume30MinutesBefore5,tick30MinutesBefore5,markD,pointHighSum,
+volumeSecond,10000,100000000
+price,1,12
+time,0,24301
+firstHourLow,-1,-1
+volumeMinute,100000,10000000
+PCI,0.005,0.1
+tickMinute,5,1000
+PCIMinute,-0.05,0.05
+volume30MinutesBefore5,0,10000000
+tick30MinutesBefore5,0,1000000
+
+
+symbol,time,price,volumeDay,volumeSecond,PCI,volumeMinute,4% - 2%,2% - 1%,firstHourLow,tickMinute,PCIMinute,volume30MinutesBefore5,tick30MinutesBefore5,markD,priceSpread30MinutePCIPre5,movingAverage5By5,win4To2FluctuationSum,pointHighSum,
+volumeSecond,10000,100000000
+time,0,24301
+volumeMinute,100000,10000000
+PCI,0.0025,0.1
+tickMinute,5,200000
+pointHighSum,5,1000
+
+// produces good results.
+symbol,time,price,volumeDay,volumeSecond,PCI,volumeMinute,4% - 2%,priceSpread30MinutePCIPre5,2% - 1%,firstHourLow,tickMinute,PCIMinute,volume30MinutesBefore5,tick30MinutesBefore5,markD,priceSpread30MinutePCIPre5,
+volumeSecond,5000,100000000
+time,0,24301
+volumeMinute,50000,10000000
+PCI,0.0015,0.1
+tickMinute,20,200000
+tick15Second,15,9999
+tick30MinutesBefore5,0,10
+PCI15Second,0.01,0.08
+volume15Second,30000,99999999
