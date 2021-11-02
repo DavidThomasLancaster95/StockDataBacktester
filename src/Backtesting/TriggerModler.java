@@ -16,16 +16,23 @@ public class TriggerModler {
     // write main loop
     private ArrayList<String> daysToBackTest;
     private String mProgramSettingsURL;
-    private String mHomeDirectory;
+    private String MMMFolder;
     private List<SimpleParameter> simpleParameterList;
     private List<String> headers;
     private String outputFile;
     private String parameterFile;
+    private String configFilePath;
+    private String sourceFilePath;
 
-    public TriggerModler(String programSettingsURL, String homeDirectory, String outputFileX, String parameterFileX) {
+    public TriggerModler(String homeDirectory, String outputFileX, String parameterFileX) {
+        configFilePath = "src/Configurations/";
+        sourceFilePath = "src/";
+
+        //configFilePath = "Configurations/";
+        //sourceFilePath = "";
+
         daysToBackTest = new ArrayList<>();
-        mProgramSettingsURL = programSettingsURL;
-        mHomeDirectory = homeDirectory;
+        MMMFolder = homeDirectory;
         outputFile = outputFileX;
         parameterFile = parameterFileX;
         loadSimpleParameterList();
@@ -44,7 +51,7 @@ public class TriggerModler {
     public void backTestDay(String day) throws IOException {
         System.out.println(day);
         for (int i = 1; i <= 14; i++) {
-            String subFileUrl = mHomeDirectory + "\\DataAsCSV\\" + day + "\\D" + i + day + ".csv";
+            String subFileUrl = MMMFolder + "\\DataAsCSV\\" + day + "\\D" + i + day + ".csv";
             processSubFile(subFileUrl, day);
         }
         // add the buffer to results
@@ -145,7 +152,7 @@ public class TriggerModler {
 
     public void printSBToOutput(StringBuilder sb) {
         try {
-            File file = new File(mProgramSettingsURL + outputFile);
+            File file = new File(sourceFilePath + outputFile);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -174,7 +181,7 @@ public class TriggerModler {
             }
 
 
-            File file = new File(mProgramSettingsURL + outputFile);
+            File file = new File(sourceFilePath + outputFile);
             if (!file.exists()){
                 file.createNewFile();
             }
@@ -280,7 +287,7 @@ public class TriggerModler {
     }
 
     public void loadSimpleParameterList() {
-        List<List<String>> parameterRecords = getCSV2(mProgramSettingsURL + parameterFile);
+        List<List<String>> parameterRecords = getCSV2(configFilePath + parameterFile);
         // get the data from parameters.txt
         // load them into a parameter object -> field : min : max
         // load it into an array.
@@ -300,7 +307,7 @@ public class TriggerModler {
 
 
     public void getDaysToBackTest() throws FileNotFoundException {
-        File file = new File(mProgramSettingsURL + "backtestdays.txt");
+        File file = new File(configFilePath + "backtestdays.txt");
         Scanner scanner = new Scanner(file);
         while(scanner.hasNext()) {
             daysToBackTest.add(scanner.next());

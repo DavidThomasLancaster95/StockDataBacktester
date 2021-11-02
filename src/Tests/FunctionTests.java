@@ -97,6 +97,7 @@ public class FunctionTests {
     }
 
     public void printSBToOutput(StringBuilder sb) {
+        System.out.println("trying to print results to -> " + mProgramSettingsURL);
         try {
             File file = new File(mProgramSettingsURL + "functionTests.csv");
             if (!file.exists()) {
