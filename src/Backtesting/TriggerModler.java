@@ -24,6 +24,11 @@ public class TriggerModler {
     private String configFilePath;
     private String sourceFilePath;
 
+    private String killSwitchName;
+    private double killSwitchMin;
+    private double killSwitchMax;
+
+
     public TriggerModler(String homeDirectory, String outputFileX, String parameterFileX) {
         configFilePath = "src/Configurations/";
         sourceFilePath = "src/";
@@ -36,6 +41,10 @@ public class TriggerModler {
         outputFile = outputFileX;
         parameterFile = parameterFileX;
         loadSimpleParameterList();
+        killSwitchName = "UNDEFINED";
+        killSwitchMin = -1.0;
+        killSwitchMax = -1.0;
+        loadKillswitch();
         printCSVHeaders();
 
     }
@@ -80,6 +89,11 @@ public class TriggerModler {
         //System.out.println("asdf");
         //Search for trigger
         int triggerInt = -1;
+
+        // --------- KILLSWITCH ---------
+        if (testKillSwitch(dayData)) return;
+        // ------------------------------
+
         for (int i = dayData.priceL.size() - 1; i >= 0; i--) {
             //int curVol = dayData.getVolumeSeconds().get(i);
             // write the trigger criteria
@@ -100,18 +114,6 @@ public class TriggerModler {
     }
 
     public void printDayDataValues(DayData dayData, int index) throws IOException {
-//        File file = new File("output.txt");
-//        FileWriter fileWriter = new FileWriter(file, true);
-//        BufferedWriter br = new BufferedWriter(fileWriter);
-//        PrintWriter printWriter = new PrintWriter(br);
-//        fileWriter.write(dayData.getStockName() + ", ");
-//        if (dayData.triggerPCI != -99999.0) printWriter.println("TRIGGER PCI: " + String.valueOf(dayData.triggerPCI + ", "));
-//        if (dayData.triggerVolumeSecond != -1) printWriter.println("TRIGGER VOLUME: " + String.valueOf(dayData.triggerVolumeSecond + " "));
-//        printWriter.println("\n");
-//        printWriter.close();
-//        br.close();
-//        fileWriter.close();
-
 
         // printing to csv
         StringBuilder sb = new StringBuilder();
@@ -129,8 +131,13 @@ public class TriggerModler {
             if (head.equals("tickDay")) sb.append(String.valueOf(dayData.getTickL().get(index)) + ",");
             if (head.equals("tickSecond")) sb.append(String.valueOf(dayData.triggerTickSecond) + ",");
             if (head.equals("volumeMinute")) sb.append(String.valueOf(dayData.triggerVolumeMinute) + ",");
+
             if (head.equals("4% - 2%")) sb.append(String.valueOf(dayData.triggerStrategy4To2) + ",");
             if (head.equals("2% - 1%")) sb.append(String.valueOf(dayData.triggerStrategy2To1) + ",");
+            if (head.equals("10% - 2%")) sb.append(String.valueOf(dayData.triggerStrategy10To2) + ",");
+            if (head.equals("50% - 5%")) sb.append(String.valueOf(dayData.triggerStrategy50To5) + ",");
+            if (head.equals("12% - 3%")) sb.append(String.valueOf(dayData.triggerStrategy12To3) + ",");
+
             if (head.equals("firstHourLow")) sb.append(String.valueOf(dayData.firstHourLow + ","));
             if (head.equals("tickMinute")) sb.append(String.valueOf(dayData.triggerTickMinute + ","));
             if (head.equals("PCIMinute")) sb.append(String.valueOf(dayData.triggerPCIMinute + ","));
@@ -142,13 +149,26 @@ public class TriggerModler {
             if (head.equals("win4To2FluctuationSum")) sb.append(String.valueOf(dayData.triggerWin4To2FluctuationSum) + ",");
             if (head.equals("pointHighSum")) sb.append(String.valueOf(dayData.triggerPointHighSumArray) + ",");
             if (head.equals("tick15Second")) sb.append(String.valueOf(dayData.triggerTick15Second) + ",");
+
             if (head.equals("volume15Second")) sb.append(String.valueOf(dayData.triggerVolume15Second) + ",");
+            if (head.equals("volume10Second")) sb.append(String.valueOf(dayData.triggerVolume10Second) + ",");
+            if (head.equals("averageMinuteVolume30PreMarket")) sb.append(String.valueOf(dayData.averageMinuteVolume30PreMarket));
+            if (head.equals("totalMorningVolume")) sb.append(String.valueOf(dayData.totalMorningVolume));
+
             if (head.equals("PCI15Second")) sb.append(String.valueOf(dayData.triggerPCI15Second) + ",");
         }
 
         printSBToOutput(sb);
 
     }
+
+    public boolean testKillSwitch(DayData dayData) {
+        if (killSwitchName.equals("totalMorningVolume")) {
+            if(dayData.totalMorningVolume > killSwitchMax || dayData.totalMorningVolume < killSwitchMin) return false;
+        }
+        return true;
+    }
+
 
     public void printSBToOutput(StringBuilder sb) {
         try {
@@ -273,8 +293,17 @@ public class TriggerModler {
             if (simpleParameter.headerName.equals("volume15Second")) {
                 if (dayData.volume15Second.get(index) > simpleParameter.max || dayData.volume15Second.get(index) < simpleParameter.min) return false;
             }
+            if (simpleParameter.headerName.equals("volume10Second")) {
+                if (dayData.volume10Second.get(index) > simpleParameter.max || dayData.volume10Second.get(index) < simpleParameter.min) return false;
+            }
             if (simpleParameter.headerName.equals("PCI15Second")) {
                 if (dayData.PCI15Second.get(index) > simpleParameter.max || dayData.PCI15Second.get(index) < simpleParameter.min) return false;
+            }
+            if (simpleParameter.headerName.equals("averageMinuteVolume30PreMarket")) {
+                if (dayData.averageMinuteVolume30PreMarket > simpleParameter.max || dayData.averageMinuteVolume30PreMarket < simpleParameter.min) return false;
+            }
+            if (simpleParameter.headerName.equals("totalMorningVolume")) {
+                if (dayData.totalMorningVolume > simpleParameter.max || dayData.totalMorningVolume < simpleParameter.min) return false;
             }
 
         }
@@ -302,6 +331,20 @@ public class TriggerModler {
 
         // this loads the headers in the parameter
         this.headers = parameterRecords.get(0);
+    }
+
+    public void loadKillswitch() {
+        try {
+            List<List<String>> parameterRecords = getCSV2(configFilePath + "killswitch.txt");
+            List<String> paramLine = parameterRecords.get(0);
+            killSwitchName = paramLine.get(0);
+            killSwitchMin = Double.parseDouble(paramLine.get(1));
+            killSwitchMax = Double.parseDouble(paramLine.get(2));
+        } catch (Exception e) {
+            System.out.println("There was a problem loading the kill switch data");
+        }
+
+
     }
 
 

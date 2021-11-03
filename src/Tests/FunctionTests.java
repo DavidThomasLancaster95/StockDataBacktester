@@ -3,7 +3,6 @@ package Tests;
 import Objects.DayData;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static ExcelCommunication.ExcelCommunicator.getCSV2;
@@ -46,24 +45,43 @@ public class FunctionTests {
                 + "PointHighSumArray,," + "tick15Second,," + "volume15Second,," + "PCI15Second,," + "win4To2Fluctuation,," +
                 "pointHighArray,," + "volumeMinute,," + "\n");
 
-        dayData.calculatePCI();
-        dayData.calculateVolumeSeconds();
-        dayData.calculate4To2WinStrategy();
-        dayData.calculateMinuteTicks();
-        dayData.calculateTickSeconds();
-        dayData.calculatePCIMinute();
-        dayData.calculateVolume30MinutesBefore5();
-        dayData.calculatePriceSpread30MinutePCIPre5();
-        dayData.calculateMovingAverage5By5();
-        dayData.calculateWin4To2FluctuationSum();
-        dayData.calculatePointHighSumArray();
-        dayData.calculateTick15Second();
-        dayData.calculateVolume15Second();
-        dayData.calculatePCI15Second();
-        dayData.calculateWin4To2FluctuationSum();
-        dayData.calculatePointHighArray();
-        dayData.calculateVolumeMinute();
-        dayData.calculatePCI15Second();
+        //dayData.calculatePCI();
+        Indicators.PCI.calculatePCI(dayData);
+        //dayData.calculateVolumeSeconds();
+        Indicators.Volume.calculateVolumeSeconds(dayData);
+        //dayData.calculate4To2WinStrategy();
+        Indicators.WinStrategies.calculate4To2WinStrategy(dayData);
+        //dayData.calculateMinuteTicks();
+        Indicators.Tick.calculateMinuteTicks(dayData);
+        //dayData.calculateTickSeconds();
+        Indicators.Tick.calculateTickSeconds(dayData);
+        //dayData.calculatePCIMinute();
+        Indicators.PCI.calculatePCIMinute(dayData);
+        //dayData.calculateVolume30MinutesBefore5();
+        Indicators.Volume.calculateVolume30MinutesBefore5(dayData);
+        //dayData.calculatePriceSpread30MinutePCIPre5();
+        Indicators.PriceSpreads.calculatePriceSpread30MinutePCIPre5(dayData);
+        //dayData.calculateMovingAverage5By5();
+        Indicators.MovingAverages.calculateMovingAverage5By5(dayData);
+        //dayData.calculateWin4To2FluctuationSum();
+        Indicators.FluctuationSum.calculateWin4To2FluctuationSum(dayData);
+        //dayData.calculatePointHighSumArray();
+        Indicators.PointHigh.calculatePointHighSumArray(dayData);
+        //dayData.calculateTick15Second();
+        Indicators.Tick.calculateTick15Second(dayData);
+        //dayData.calculateVolume15Second();
+        Indicators.Volume.calculateVolume15Second(dayData);
+        //dayData.calculatePCI15Second();
+        Indicators.PCI.calculatePCI15Second(dayData);
+        //dayData.calculateWin4To2FluctuationSum();
+        Indicators.FluctuationSum.calculateWin4To2FluctuationSum(dayData);
+        //dayData.calculatePointHighArray();
+        Indicators.PointHigh.calculatePointHighArray(dayData);
+        //dayData.calculateVolumeMinute();
+        Indicators.Volume.calculateVolumeMinute(dayData);
+        //dayData.calculatePCI15Second();
+        Indicators.PCI.calculatePCI15Second(dayData);
+
 
 
         for (int i = 0; i < dayData.markDL.size(); i++) {

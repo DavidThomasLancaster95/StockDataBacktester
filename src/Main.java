@@ -1,15 +1,28 @@
 import Backtesting.TriggerModler;
-import Calculation.TimeCalculation;
+import ExcelCommunication.ExcelCommunicator;
+import Indicators.PCI;
+import Objects.DayData;
 import Tests.FunctionTests;
 
 import java.io.*;
+import java.util.List;
 
+import static ExcelCommunication.ExcelCommunicator.getCSV2;
+import static ExcelCommunication.ExcelCommunicator.getStockByNumber;
 
 
 public class Main {
     //String homeDirectory = "C:\\Users\\dazon\\Desktop\\MMM\\";
     //String homeDirectory = "D:\\Stocks\\MMM\\";
     public static void main(String[] args) throws IOException {
+
+        // playground crap delete later
+//        ExcelCommunicator excelCommunicator = new ExcelCommunicator();
+//        List<List<String>> records = getCSV2("D:\\Stocks\\MMM\\DataAsCSV\\FullVersion.csv");
+//        DayData dayData = getStockByNumber(records, 20);
+//        PCI.calculatePCI(dayData);
+//        PCI.calculatePCI15Second(dayData);
+        // ---------- END ----------
 
         String homeDirectory = args[0];
         int numberOfStrategies = Integer.parseInt(args[1]) ;
