@@ -32,6 +32,7 @@ public class Volume {
     }
 
     public static void calculateVolume10SecondAtTrigger(DayData dayData, int trigger) {
+        if (dayData.volume10Second.size() == 0) calculateVolume10Second(dayData);
         dayData.triggerVolume10Second = dayData.volume10Second.get(trigger);
     }
 
@@ -96,5 +97,35 @@ public class Volume {
         dayData.totalMorningVolume = dayData.volumeL.get(27902); // 27902 is 1 second before the market opens.
     }
 
+    public static void calculateVolume4Second(DayData dayData) {
+        for (int i = 0; i < dayData.volumeL.size() - 5; i++) {
+            Double currentVolume = dayData.volumeL.get(i);
+            Double volume4SecondAgo = dayData.volumeL.get(i + 3);
+            dayData.volume4Second.add((int) (currentVolume - volume4SecondAgo));
+        }
+        for (int i = 0; i <= 4; i++) {
+            dayData.volume4Second.add(0);
+        }
+    }
 
+    public static void calculateVolume4SecondAtTrigger(DayData dayData, int trigger) {
+        if (dayData.volume4Second.size() == 0) calculateVolume4Second(dayData);
+        dayData.triggerVolume4Second = dayData.volume4Second.get(trigger);
+    }
+
+    public static void calculateVolume10SecondBefore10Second(DayData dayData) {
+        for (int i = 0; i < dayData.volumeL.size() - 19; i++) { // 35 minutes - 1 second
+            double volume10SecondsAgo = dayData.volumeL.get(i + 9);
+            double volume20SecondsAgo = dayData.volumeL.get(i + 19);
+            dayData.volume10SecondBefore10Second.add((int)(volume10SecondsAgo - volume20SecondsAgo));
+        }
+        for (int i = 0; i < 19; i++) {
+            dayData.volume10SecondBefore10Second.add(0);
+        }
+    }
+
+    public static void calculateVolume10SecondBefore10SecondAtTrigger(DayData dayData, int trigger) {
+        if (dayData.volume10SecondBefore10Second.size() == 0) calculateVolume10SecondBefore10Second(dayData);
+        dayData.triggerVolume10SecondBefore10Second = dayData.volume10SecondBefore10Second.get(trigger);
+    }
 }

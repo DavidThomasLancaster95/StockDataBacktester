@@ -72,4 +72,53 @@ public class Tick {
         }
         dayData.triggerTickMinute = returnInt;
     }
+
+    public static void calculateTick10Second(DayData dayData) {
+
+        for (int i = 0; i < dayData.tickL.size() - 10; i++) {
+            int currentTick = dayData.tickL.get(i);
+            int tick10SecondsAgo = dayData.tickL.get(i + 9);
+            dayData.tick10Second.add(currentTick - tick10SecondsAgo);
+        }
+        for (int i = 0; i <= 10; i++) {
+            dayData.tick10Second.add(0);
+        }
+    }
+
+    public static void calculateTick10SecondAtTrigger(DayData dayData ,int trigger) {
+        dayData.triggerTick10Second = dayData.tick10Second.get(trigger);
+    }
+
+    public static void calculateTick4Second(DayData dayData) {
+
+        for (int i = 0; i < dayData.tickL.size() - 4; i++) {
+            int currentTick = dayData.tickL.get(i);
+            int tick4SecondsAgo = dayData.tickL.get(i + 3);
+            dayData.tick4Second.add(currentTick - tick4SecondsAgo);
+        }
+        for (int i = 0; i <= 4; i++) {
+            dayData.tick4Second.add(0);
+        }
+    }
+
+    public static void calculateTick4SecondAtTrigger(DayData dayData ,int trigger) {
+        if (dayData.tick4Second.size() == 0) calculateTick4Second(dayData);
+        dayData.triggerTick4Second = dayData.tick4Second.get(trigger);
+    }
+
+    public static void calculateTick10SecondBefore10Second(DayData dayData) {
+        for (int i = 0; i < dayData.tickL.size() - 19; i++) { // 35 minutes - 1 second
+            double tick10SecondsAgo = dayData.tickL.get(i + 9);
+            double tick20SecondsAgo = dayData.tickL.get(i + 19);
+            dayData.tick10SecondBefore10Second.add((int)(tick10SecondsAgo - tick20SecondsAgo));
+        }
+        for (int i = 0; i < 19; i++) {
+            dayData.tick10SecondBefore10Second.add(0);
+        }
+    }
+
+    public static void calculateTick10SecondBefore10SecondAtTrigger(DayData dayData, int trigger) {
+        if (dayData.tick10SecondBefore10Second.size() == 0) calculateTick10SecondBefore10Second(dayData);
+        dayData.triggerTick10SecondBefore10Second = dayData.tick10SecondBefore10Second.get(trigger);
+    }
 }

@@ -6,12 +6,16 @@ import java.util.Date;
 
 public class TimeCalculation {
 
+    static public int lineOfTime730() { return 35103; }
+    static public int lineOfTime830() { return 31503; }
     static public int lineOfTime930(){
         return 27901;
     }
     static public int lineOfTime1030(){
         return 24301;
     }
+    static public int lineOfTime1600() { return 4503; }
+
 
     public static String ConvertTimeIntToString(int timeInt) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");

@@ -56,4 +56,39 @@ public class PCI {
     public static void calculatePCI15SecondAtTrigger(DayData dayData, int trigger) {
         dayData.triggerPCI15Second = dayData.PCI15Second.get(trigger);
     }
+
+    public static void calculatePCI10Second(DayData dayData) {
+
+        for (int i = 0; i < dayData.priceL.size() - 11; i++) {
+            double currentPrice = dayData.priceL.get(i);
+            double price10SecondsAgo = dayData.priceL.get(i + 9);
+            dayData.PCI10Second.add(DayData.calculatePCIBetween2Points(currentPrice, price10SecondsAgo));
+        }
+        for (int i = 0; i < 10; i++) {
+            dayData.PCI10Second.add(0.0);
+        }
+    }
+
+    public static void calculatePCI10SecondAtTrigger(DayData dayData, int trigger) {
+        if (dayData.PCI10Second.size() == 0) calculatePCI10Second(dayData);
+        dayData.triggerPCI10Second = dayData.PCI10Second.get(trigger);
+    }
+
+    public static void calculatePCI4Second(DayData dayData) {
+
+        for (int i = 0; i < dayData.priceL.size() - 5; i++) {
+            double currentPrice = dayData.priceL.get(i);
+            double price4SecondsAgo = dayData.priceL.get(i + 3);
+            dayData.PCI4Second.add(DayData.calculatePCIBetween2Points(currentPrice, price4SecondsAgo));
+        }
+        for (int i = 0; i < 4; i++) {
+            dayData.PCI4Second.add(0.0);
+        }
+    }
+
+    public static void calculatePCI4SecondAtTrigger(DayData dayData, int trigger) {
+        if (dayData.PCI4Second.size() == 0) calculatePCI4Second(dayData);
+        dayData.triggerPCI4Second = dayData.PCI4Second.get(trigger);
+    }
+
 }

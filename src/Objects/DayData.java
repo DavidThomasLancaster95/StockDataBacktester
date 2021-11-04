@@ -26,10 +26,17 @@ public class DayData {
     public ArrayList<Double> PCI;
 
     public double firstHourLow;
+
     public ArrayList<Integer> tickMinute;
     public ArrayList<Integer> tick15Second;
+    public ArrayList<Integer> tick10Second;
+    public ArrayList<Integer> tick4Second;
+    public ArrayList<Integer> tick10SecondBefore10Second;
+
     public ArrayList<Double> PCIMinute;
     public ArrayList<Double> PCI15Second;
+    public ArrayList<Double> PCI10Second;
+    public ArrayList<Double> PCI4Second;
 
     public ArrayList<Integer> tick30MinutesBefore5;
     public ArrayList<Double> priceSpread30MinutePCIPre5;
@@ -37,6 +44,10 @@ public class DayData {
     public ArrayList<Integer> win4To2Fluctuation;
     public ArrayList<Integer> win4To2FluctuationSum;
 
+    public ArrayList<Integer> previous1Hour4To2WinFluctuationSum;
+
+    public ArrayList<Integer> volume10SecondBefore10Second;
+    public ArrayList<Integer> volume4Second;
     public ArrayList<Integer> volume10Second;
     public ArrayList<Integer> volume15Second;
     public ArrayList<Integer> volumeMinute;
@@ -53,6 +64,7 @@ public class DayData {
     public ArrayList<String> tradeStrategy50To5;
     public ArrayList<String> tradeStrategy12To3;
 
+    public ArrayList<Double> volumeToTickRatio10Second;
 
     // trigger value variables;
     public double triggerPCI;
@@ -65,22 +77,35 @@ public class DayData {
     public int triggerStrategy12To3;
     public String triggerTimeAsString;
     public int triggerTickMinute;
-    public double triggerPCIMinute;
+
     public int triggerVolume30MinutesBefore5;
     public int triggerTick30MinutesBefore5;
     public double triggerMarkD;
     public double triggerPriceSpread30MinutePCIPre5;
     public double triggerMovingAverage5By5;
     public int triggerWin4To2FluctuationSum;
+
+    public int triggerPrevious1Hour4To2WinFluctuationSum;
+
     public int triggerPointHighSumArray;
     public int triggerTick15Second;
+    public int triggerTick10Second;
+    public int triggerTick4Second;
+    public int triggerTick10SecondBefore10Second;
 
+    public int triggerVolume4Second;
     public int triggerVolume10Second;
     public int triggerVolumeMinute;
     public int triggerVolumeSecond;
     public int triggerVolume15Second;
+    public int triggerVolume10SecondBefore10Second;
 
     public double triggerPCI15Second;
+    public double triggerPCIMinute;
+    public double triggerPCI10Second;
+    public double triggerPCI4Second;
+
+    public double triggerVolumeToTickRatio10Second;
 
     public DayData(float stockFloat, String stockName) {
         this.stockFloat = stockFloat;
@@ -100,7 +125,14 @@ public class DayData {
         pointHighArray = new ArrayList<>();
         pointHighSumArray = new ArrayList<>();
         firstHourLow = 9999;
+
         tickMinute = new ArrayList<>();
+        tick10Second = new ArrayList<>();
+        tickSeconds = new ArrayList<>();
+        tick15Second = new ArrayList<>();
+        tick4Second = new ArrayList<>();
+        tick10SecondBefore10Second = new ArrayList<>();
+
         PCIMinute = new ArrayList<>();
 
         tick30MinutesBefore5 = new ArrayList<>();
@@ -108,13 +140,18 @@ public class DayData {
         movingAverage5By5 = new ArrayList<>();
         win4To2Fluctuation = new ArrayList<>();
         win4To2FluctuationSum = new ArrayList<>();
-        PCI = new ArrayList<>();
+        previous1Hour4To2WinFluctuationSum = new ArrayList<>();
+
+
         volumeSeconds = new ArrayList<>();
-        tickSeconds = new ArrayList<>();
-        tick15Second = new ArrayList<>();
 
+        PCI = new ArrayList<>();
         PCI15Second = new ArrayList<>();
+        PCI10Second = new ArrayList<>();
+        PCI4Second = new ArrayList<>();
 
+        volume10SecondBefore10Second = new ArrayList<>();
+        volume4Second = new ArrayList<>();
         volume30MinutesBefore5 = new ArrayList<>();
         volumeMinute = new ArrayList<>();
         volume15Second = new ArrayList<>();
@@ -122,10 +159,16 @@ public class DayData {
         averageMinuteVolume30PreMarket = -1.0;
         totalMorningVolume = -1.0;
 
+        volumeToTickRatio10Second = new ArrayList<>();
+
         // trigger value variables initiate
         triggerPCI = -99999.0;
-        triggerVolumeSecond = -1;
+        triggerVolumeSecond = -1
+        ;
         triggerTickSecond = -1;
+        triggerTick10Second = -1;
+        triggerTick4Second = -1;
+        triggerTick10SecondBefore10Second = -1;
 
         triggerTime = -1;
 
@@ -137,22 +180,29 @@ public class DayData {
 
         triggerTimeAsString = "";
         triggerTickMinute = -1;
-        triggerPCIMinute = -9999.9;
+
 
         triggerTick30MinutesBefore5 = -1;
         triggerMarkD = -9999.9;
         triggerPriceSpread30MinutePCIPre5 = -1;
         triggerMovingAverage5By5 = -9999.9;
         triggerWin4To2FluctuationSum = -1;
+        triggerPrevious1Hour4To2WinFluctuationSum = -1;
         triggerTick15Second = -1;
 
+        triggerVolume10SecondBefore10Second = -1;
+        triggerVolume4Second = -1;
         triggerVolumeMinute = -1;
         triggerVolume30MinutesBefore5 = -1;
         triggerVolume15Second = -1;
         triggerVolume10Second = -1;
 
-
+        triggerPCIMinute = -9999.9;
         triggerPCI15Second = -99999.0;
+        triggerPCI10Second = -99999.0;
+        triggerPCI4Second = -99999.0;
+
+        triggerVolumeToTickRatio10Second = -9999.9;
     }
 
     public void calculateTriggerValues(int trigger, List<String> headers) {
@@ -248,6 +298,9 @@ public class DayData {
                 FluctuationSum.calculateWin4To2FluctuationSumAtTrigger(this, trigger);
                 //calculateWin4To2FluctuationSumAtTrigger(trigger);
             }
+            if (head.equals("previous1Hour4To2WinFluctuationSum")) {
+                Indicators.FluctuationSum.calculatePrevious1Hour4To2WinFluctuationSumAtTrigger(this, trigger);
+            }
             if (head.equals("pointHighSum")) {
                 if (pointHighArray.size() == 0) PointHigh.calculatePointHighArray(this);//calculatePointHighArray();
                 if (pointHighSumArray.size() == 0) PointHigh.calculatePointHighSumArray(this);//calculatePointHighSumArray();
@@ -259,6 +312,15 @@ public class DayData {
                 //Tick15Second.calculateTick15SecondAtTrigger(this, trigger);
                 Indicators.Tick.calculateTick15SecondAtTrigger(this, trigger);
             }
+            if (head.equals("tick10Second")) {
+                Indicators.Tick.calculateTick10SecondAtTrigger(this, trigger);
+            }
+            if (head.equals("tick4Second")) {
+                Indicators.Tick.calculateTick4SecondAtTrigger(this, trigger);
+            }
+            if (head.equals("tick10SecondBefore10Second")) {
+                Indicators.Tick.calculateTick10SecondBefore10SecondAtTrigger(this, trigger);
+            }
             if (head.equals("volume15Second")) {
                 //calculateVolume15SecondAtTrigger(trigger);
                 //Volume15Second.calculateVolume15SecondAtTrigger(this, trigger);
@@ -267,10 +329,28 @@ public class DayData {
             if (head.equals("volume10Second")) {
                 Indicators.Volume.calculateVolume10SecondAtTrigger(this, trigger);
             }
+            if (head.equals("volume4Second")) {
+                Indicators.Volume.calculateVolume4SecondAtTrigger(this, trigger);
+            }
+            if (head.equals("volume10SecondBefore10Second")) {
+                Indicators.Volume.calculateVolume10SecondBefore10SecondAtTrigger(this, trigger);
+            }
+            if (head.equals("averageMinuteVolume30PreMarket")) {
+                if (averageMinuteVolume30PreMarket == -1) Indicators.Volume.calculateAverageMinuteVolume30PreMarket(this);
+            }
             if (head.equals("PCI15Second")) {
                 //calculatePCI15SecondAtTrigger(trigger);
                 //Indicators.PCI15Second.calculatePCI15SecondAtTrigger(this, trigger);
                 Indicators.PCI.calculatePCI15SecondAtTrigger(this, trigger);
+            }
+            if (head.equals("PCI10Second")) {
+                Indicators.PCI.calculatePCI10SecondAtTrigger(this, trigger);
+            }
+            if (head.equals("PCI4Second")) {
+                Indicators.PCI.calculatePCI4SecondAtTrigger(this, trigger);
+            }
+            if (head.equals("volumeToTickRatio10Second")) {
+                Indicators.Ratios.calculateVolumeToTickRatio10SecondAtTrigger(this, trigger);
             }
         }
 
@@ -347,6 +427,18 @@ public class DayData {
                 //Indicators.Tick15Second.calculateTick15Second(this);
                 Indicators.Tick.calculateTick15Second(this);
             }
+            if (parameter.headerName.equals("tick10Second")) {
+                Indicators.Tick.calculateTick10Second(this);
+            }
+            if (parameter.headerName.equals("tick4Second")) {
+                Indicators.Tick.calculateTick4Second(this);
+            }
+            if (parameter.headerName.equals("tick10SecondBefore10Second")) {
+                Indicators.Tick.calculateTick10SecondBefore10Second(this);
+            }
+            if (parameter.headerName.equals("volume4Second")) {
+                Indicators.Volume.calculateVolume4Second(this);
+            }
             if (parameter.headerName.equals("volume15Second")) {
                 //calculateVolume15Second();
                 //Volume15Second.calculateVolume15Second(this);
@@ -355,16 +447,28 @@ public class DayData {
             if (parameter.headerName.equals("volume10Second")) {
                 Indicators.Volume.calculateVolume10Second(this);
             }
+            if (parameter.headerName.equals("volume10SecondBefore10Second")) {
+                Indicators.Volume.calculateVolume10SecondBefore10Second(this);
+            }
             if (parameter.headerName.equals("PCI15Second")) {
                 //calculatePCI15Second();
                 //Indicators.PCI15Second.calculatePCI15Second(this);
                 Indicators.PCI.calculatePCI15Second(this);
+            }
+            if (parameter.headerName.equals("PCI10Second")) {
+                Indicators.PCI.calculatePCI10Second(this);
+            }
+            if (parameter.headerName.equals("PCI4Second")) {
+                Indicators.PCI.calculatePCI4Second(this);
             }
             if (parameter.headerName.equals("averageMinuteVolume30PreMarket")) {
                 Indicators.Volume.calculateAverageMinuteVolume30PreMarket(this);
             }
             if (parameter.headerName.equals("totalMorningVolume")) {
                 Indicators.Volume.calculateTotalMorningVolume(this);
+            }
+            if (parameter.headerName.equals("volumeToTickRatio10Second")) {
+                Indicators.Ratios.calculateVolumeToTickRatio10Second(this);
             }
         }
 

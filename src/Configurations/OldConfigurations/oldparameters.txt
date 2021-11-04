@@ -42,3 +42,4 @@ tick15Second,15,9999
 tick30MinutesBefore5,0,10
 PCI15Second,0.01,0.08
 volume15Second,30000,99999999
+

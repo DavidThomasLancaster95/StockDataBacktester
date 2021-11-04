@@ -91,7 +91,7 @@ public class TriggerModler {
         int triggerInt = -1;
 
         // --------- KILLSWITCH ---------
-        if (testKillSwitch(dayData)) return;
+        if (!testKillSwitch(dayData)) return;
         // ------------------------------
 
         for (int i = dayData.priceL.size() - 1; i >= 0; i--) {
@@ -123,6 +123,7 @@ public class TriggerModler {
 
             if (head.equals("symbol")) sb.append(String.valueOf(dayData.stockName) + ",");
             if (head.equals("time")) sb.append(String.valueOf(dayData.triggerTimeAsString) + ",");
+            if (head.equals("float")) sb.append(String.valueOf(dayData.stockFloat) + ",");
 
             if (head.equals("price")) sb.append(String.valueOf(dayData.getPriceL().get(index)) + ",");
             if (head.equals("PCI")) sb.append(String.valueOf(dayData.triggerPCI) + ",");
@@ -148,14 +149,26 @@ public class TriggerModler {
             if (head.equals("movingAverage5By5")) sb.append(String.valueOf(dayData.triggerMovingAverage5By5) + ",");
             if (head.equals("win4To2FluctuationSum")) sb.append(String.valueOf(dayData.triggerWin4To2FluctuationSum) + ",");
             if (head.equals("pointHighSum")) sb.append(String.valueOf(dayData.triggerPointHighSumArray) + ",");
-            if (head.equals("tick15Second")) sb.append(String.valueOf(dayData.triggerTick15Second) + ",");
 
+            if (head.equals("tick15Second")) sb.append(String.valueOf(dayData.triggerTick15Second) + ",");
+            if (head.equals("tick10Second")) sb.append(String.valueOf(dayData.triggerTick10Second) + ",");
+            if (head.equals("tick4Second")) sb.append(String.valueOf(dayData.triggerTick4Second) + ",");
+            if (head.equals("tick10SecondBefore10Second")) sb.append(String.valueOf(dayData.triggerTick10SecondBefore10Second) + ",");
+
+            if (head.equals("volume4Second")) sb.append(String.valueOf(dayData.triggerVolume4Second) + ",");
             if (head.equals("volume15Second")) sb.append(String.valueOf(dayData.triggerVolume15Second) + ",");
             if (head.equals("volume10Second")) sb.append(String.valueOf(dayData.triggerVolume10Second) + ",");
-            if (head.equals("averageMinuteVolume30PreMarket")) sb.append(String.valueOf(dayData.averageMinuteVolume30PreMarket));
-            if (head.equals("totalMorningVolume")) sb.append(String.valueOf(dayData.totalMorningVolume));
+            if (head.equals("averageMinuteVolume30PreMarket")) sb.append(String.valueOf(dayData.averageMinuteVolume30PreMarket) + ",");
+            if (head.equals("totalMorningVolume")) sb.append(String.valueOf(dayData.totalMorningVolume) + ",");
+            if (head.equals("volume10SecondBefore10Second")) sb.append(String.valueOf(dayData.triggerVolume10SecondBefore10Second) + ",");
 
+            if (head.equals("PCI4Second")) sb.append(String.valueOf(dayData.triggerPCI4Second) + ",");
+            if (head.equals("PCI10Second")) sb.append(String.valueOf(dayData.triggerPCI10Second) + ",");
             if (head.equals("PCI15Second")) sb.append(String.valueOf(dayData.triggerPCI15Second) + ",");
+            if (head.equals("previous1Hour4To2WinFluctuationSum")) sb.append(String.valueOf(dayData.triggerPrevious1Hour4To2WinFluctuationSum) + ",");
+
+            if (head.equals("volumeToTickRatio10Second")) sb.append(String.valueOf(dayData.triggerVolumeToTickRatio10Second) + ",");
+
         }
 
         printSBToOutput(sb);
@@ -290,20 +303,41 @@ public class TriggerModler {
             if (simpleParameter.headerName.equals("tick15Second")) {
                 if (dayData.tick15Second.get(index) > simpleParameter.max || dayData.tick15Second.get(index) < simpleParameter.min) return false;
             }
+            if (simpleParameter.headerName.equals("tick10Second")) {
+                if (dayData.tick10Second.get(index) > simpleParameter.max || dayData.tick10Second.get(index) < simpleParameter.min) return false;
+            }
+            if (simpleParameter.headerName.equals("tick4Second")) {
+                if (dayData.tick4Second.get(index) > simpleParameter.max || dayData.tick4Second.get(index) < simpleParameter.min) return false;
+            }
+            if (simpleParameter.headerName.equals("tick10SecondBefore10Second")) {
+                if (dayData.tick10SecondBefore10Second.get(index) > simpleParameter.max || dayData.tick10SecondBefore10Second.get(index) < simpleParameter.min) return false;
+            }
             if (simpleParameter.headerName.equals("volume15Second")) {
                 if (dayData.volume15Second.get(index) > simpleParameter.max || dayData.volume15Second.get(index) < simpleParameter.min) return false;
             }
             if (simpleParameter.headerName.equals("volume10Second")) {
                 if (dayData.volume10Second.get(index) > simpleParameter.max || dayData.volume10Second.get(index) < simpleParameter.min) return false;
             }
+            if (simpleParameter.headerName.equals("volume10SecondBefore10Second")) {
+                if (dayData.volume10SecondBefore10Second.get(index) > simpleParameter.max || dayData.volume10SecondBefore10Second.get(index) < simpleParameter.min) return false;
+            }
+            if (simpleParameter.headerName.equals("PCI4Second")) {
+                if (dayData.PCI4Second.get(index) > simpleParameter.max || dayData.PCI4Second.get(index) < simpleParameter.min) return false;
+            }
             if (simpleParameter.headerName.equals("PCI15Second")) {
                 if (dayData.PCI15Second.get(index) > simpleParameter.max || dayData.PCI15Second.get(index) < simpleParameter.min) return false;
+            }
+            if (simpleParameter.headerName.equals("PCI10Second")) {
+                if (dayData.PCI10Second.get(index) > simpleParameter.max || dayData.PCI10Second.get(index) < simpleParameter.min) return false;
             }
             if (simpleParameter.headerName.equals("averageMinuteVolume30PreMarket")) {
                 if (dayData.averageMinuteVolume30PreMarket > simpleParameter.max || dayData.averageMinuteVolume30PreMarket < simpleParameter.min) return false;
             }
             if (simpleParameter.headerName.equals("totalMorningVolume")) {
                 if (dayData.totalMorningVolume > simpleParameter.max || dayData.totalMorningVolume < simpleParameter.min) return false;
+            }
+            if (simpleParameter.headerName.equals("volumeToTickRatio10Second")) {
+                if (dayData.volumeToTickRatio10Second.get(index) > simpleParameter.max || dayData.volumeToTickRatio10Second.get(index) < simpleParameter.min) return false;
             }
 
         }
