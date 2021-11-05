@@ -58,11 +58,23 @@ public class DayData {
 
     public ArrayList<Integer> pointHighArray;
     public ArrayList<Integer> pointHighSumArray;
+
     public ArrayList<String> tradeStrategy4To2;
     public ArrayList<String> tradeStrategy2To1;
     public ArrayList<String> tradeStrategy10To2;
     public ArrayList<String> tradeStrategy50To5;
     public ArrayList<String> tradeStrategy12To3;
+
+    public ArrayList<String> tradeStrategy50To10;
+    public ArrayList<String> tradeStrategy80To10;
+    public ArrayList<String> tradeStrategy20To3;
+    public ArrayList<String> tradeStrategy30To3;
+    public ArrayList<String> tradeStrategy50To3;
+    public ArrayList<String> tradeStrategy100To2;
+    public ArrayList<String> tradeStrategy12To6;
+    public ArrayList<String> tradeStrategy70To10;
+    public ArrayList<String> tradeStrategy10To5;
+    public ArrayList<String> tradeStrategy20To5;
 
     public ArrayList<Double> volumeToTickRatio10Second;
 
@@ -70,11 +82,24 @@ public class DayData {
     public double triggerPCI;
     public int triggerTickSecond;
     public int triggerTime;
+
     public int triggerStrategy4To2;
     public int triggerStrategy2To1;
     public int triggerStrategy10To2;
     public int triggerStrategy50To5;
     public int triggerStrategy12To3;
+
+    public int triggerStrategy50To10;
+    public int triggerStrategy80To10;
+    public int triggerStrategy20To3;
+    public int triggerStrategy30To3;
+    public int triggerStrategy50To3;
+    public int triggerStrategy100To2;
+    public int triggerStrategy12To6;
+    public int triggerStrategy70To10;
+    public int triggerStrategy10To5;
+    public int triggerStrategy20To5;
+
     public String triggerTimeAsString;
     public int triggerTickMinute;
 
@@ -121,6 +146,17 @@ public class DayData {
         tradeStrategy50To5 = new ArrayList<>();
         tradeStrategy12To3 = new ArrayList<>();
 
+        tradeStrategy50To10 = new ArrayList<>();
+        tradeStrategy80To10 = new ArrayList<>();
+        tradeStrategy20To3 = new ArrayList<>();
+        tradeStrategy30To3 = new ArrayList<>();
+        tradeStrategy50To3 = new ArrayList<>();
+        tradeStrategy100To2 = new ArrayList<>();
+        tradeStrategy12To6 = new ArrayList<>();
+        tradeStrategy70To10 = new ArrayList<>();
+        tradeStrategy10To5 = new ArrayList<>();
+        tradeStrategy20To5 = new ArrayList<>();
+
         sortIndicator = new ArrayList<>();
         pointHighArray = new ArrayList<>();
         pointHighSumArray = new ArrayList<>();
@@ -132,6 +168,8 @@ public class DayData {
         tick15Second = new ArrayList<>();
         tick4Second = new ArrayList<>();
         tick10SecondBefore10Second = new ArrayList<>();
+
+
 
         PCIMinute = new ArrayList<>();
 
@@ -177,6 +215,18 @@ public class DayData {
         triggerStrategy10To2 = -1;
         triggerStrategy50To5 = -1;
         triggerStrategy12To3 = -1;
+
+        triggerStrategy50To10 = -1;
+        triggerStrategy80To10 = -1;
+        triggerStrategy20To3 = -1;
+        triggerStrategy30To3 = -1;
+        triggerStrategy50To3 = -1;
+        triggerStrategy100To2 = -1;
+        triggerStrategy12To6 = -1;
+        triggerStrategy70To10 = -1;
+        triggerStrategy10To5 = -1;
+        triggerStrategy20To5 = -1;
+
 
         triggerTimeAsString = "";
         triggerTickMinute = -1;
@@ -258,6 +308,39 @@ public class DayData {
             if (head.equals("12% - 3%")) {
                 this.triggerStrategy12To3 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.12, -0.03, trigger);
             }
+            if (head.equals("50% - 10%")) {
+                this.triggerStrategy50To10 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.50, -0.10, trigger);
+            }
+            if (head.equals("80% - 10%")) {
+                this.triggerStrategy80To10 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.80, -0.10, trigger);
+            }
+            if (head.equals("20% - 3%")) {
+                this.triggerStrategy20To3 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.20, -0.03, trigger);
+            }
+            if (head.equals("30% - 3%")) {
+                this.triggerStrategy30To3 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.30, -0.03, trigger);
+            }
+            if (head.equals("50% - 3%")) {
+                this.triggerStrategy50To3 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.50, -0.03, trigger);
+            }
+            if (head.equals("100% - 2%")) {
+                this.triggerStrategy100To2 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 1.00, -0.02, trigger);
+            }
+            if (head.equals("12% - 6%")) {
+                this.triggerStrategy12To6 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.12, -0.06, trigger);
+            }
+            if (head.equals("70% - 10%")) {
+                this.triggerStrategy70To10 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.70, -0.10, trigger);
+            }
+            if (head.equals("10% - 5%")) {
+                this.triggerStrategy10To5 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.10, -0.05, trigger);
+            }
+            if (head.equals("20% - 5%")) {
+                this.triggerStrategy20To5 = WinStrategies.calculateWinStrategyByTypeAndStart(this, 0.20, 0.05, trigger);
+            }
+
+
+
             if (head.equals("firstHourLow") && firstHourLow == 9999) {
                 //calculateFirstHourLow();
                 PriceTimeLevels.calculateFirstHourLow(this);

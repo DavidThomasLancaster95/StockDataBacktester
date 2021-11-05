@@ -138,6 +138,18 @@ public class TriggerModler {
             if (head.equals("10% - 2%")) sb.append(String.valueOf(dayData.triggerStrategy10To2) + ",");
             if (head.equals("50% - 5%")) sb.append(String.valueOf(dayData.triggerStrategy50To5) + ",");
             if (head.equals("12% - 3%")) sb.append(String.valueOf(dayData.triggerStrategy12To3) + ",");
+            if (head.equals("50% - 10%")) sb.append(String.valueOf(dayData.triggerStrategy50To10) + ",");
+            if (head.equals("80% - 10%")) sb.append(String.valueOf(dayData.triggerStrategy80To10) + ",");
+            if (head.equals("20% - 3%")) sb.append(String.valueOf(dayData.triggerStrategy20To3) + ",");
+            if (head.equals("30% - 3%")) sb.append(String.valueOf(dayData.triggerStrategy30To3) + ",");
+            if (head.equals("50% - 3%")) sb.append(String.valueOf(dayData.triggerStrategy50To3) + ",");
+            if (head.equals("100% - 2%")) sb.append(String.valueOf(dayData.triggerStrategy100To2) + ",");
+            if (head.equals("12% - 6%")) sb.append(String.valueOf(dayData.triggerStrategy12To6) + ",");
+            if (head.equals("70% - 10%")) sb.append(String.valueOf(dayData.triggerStrategy70To10) + ",");
+            if (head.equals("10% - 5%")) sb.append(String.valueOf(dayData.triggerStrategy10To5) + ",");
+            if (head.equals("20% - 5%")) sb.append(String.valueOf(dayData.triggerStrategy20To5) + ",");
+
+
 
             if (head.equals("firstHourLow")) sb.append(String.valueOf(dayData.firstHourLow + ","));
             if (head.equals("tickMinute")) sb.append(String.valueOf(dayData.triggerTickMinute + ","));
