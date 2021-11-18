@@ -1,14 +1,12 @@
 import Backtesting.TriggerModler;
-import ExcelCommunication.ExcelCommunicator;
-import Indicators.PCI;
-import Objects.DayData;
+import Objects.IndicatorDetails;
+import Objects.IndicatorDetailsArray;
 import Tests.FunctionTests;
+import com.google.gson.Gson;
 
 import java.io.*;
-import java.util.List;
-
-import static ExcelCommunication.ExcelCommunicator.getCSV2;
-import static ExcelCommunication.ExcelCommunicator.getStockByNumber;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Main {
@@ -17,11 +15,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         // playground crap delete later
-//        ExcelCommunicator excelCommunicator = new ExcelCommunicator();
-//        List<List<String>> records = getCSV2("D:\\Stocks\\MMM\\DataAsCSV\\FullVersion.csv");
-//        DayData dayData = getStockByNumber(records, 20);
-//        PCI.calculatePCI(dayData);
-//        PCI.calculatePCI15Second(dayData);
+
         // ---------- END ----------
 
         String homeDirectory = args[0];
@@ -61,6 +55,8 @@ public class Main {
         FunctionTests functionTests = new FunctionTests("070121", "D:\\Stocks\\MMM\\",
                 "src/");
 
-        functionTests.printArrays();
+        functionTests.initiateAllIndicators();
+        functionTests.printAllIndicators();
+        System.out.println("finished function tests");
     }
 }

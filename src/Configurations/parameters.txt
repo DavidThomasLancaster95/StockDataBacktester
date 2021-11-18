@@ -1,6 +1,6 @@
-symbol,time,price,volumeDay,volumeSecond,PCI,volumeMinute,4% - 2%,priceSpread30MinutePCIPre5,2% - 1%,firstHourLow,tickMinute,PCIMinute,volume30MinutesBefore5,tick30MinutesBefore5,markD,priceSpread30MinutePCIPre5,PCI10Second,volume10SecondBefore10Second,tick10SecondBefore10Second,volume4Second,tick4Second,PCI4Second,averageMinuteVolume30PreMarket,volume10Second,previous1Hour4To2WinFluctuationSum,volumeToTickRatio10Second,10% - 2%,50% - 5%,12% - 3%
-volumeSecond,5000,100000000
+volume5Second,volume2Second,tick5Second,tick2Second,PCI1Second,4% - 2%,2% - 1%,10% - 5%,50% - 5%,markD,volumeDay,tickDay,price
 time,0,24301
-volumeToTickRatio10Second,-8000,8000
-volume10Second,0,50000000
-averageMinuteVolume30PreMarket,1000,9000000
+markD,0.1,1
+volume2Second,5000,9999999
+tick2Second,2,999
+PCI1Second,0.01,1

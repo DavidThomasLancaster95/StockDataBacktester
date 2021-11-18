@@ -119,12 +119,12 @@ public class ExcelCommunicator {
                 dayData.markDL.add(Double.parseDouble(subRow.get(startColNum).replace('%', '0')));
                 dayData.priceL.add(Double.parseDouble(subRow.get(startColNum + 1)));
                 dayData.volumeL.add(Double.parseDouble(subRow.get(startColNum + 2)));
-                dayData.tickL.add(Integer.parseInt(subRow.get(startColNum + 3)));
+                dayData.tickL.add(Double.parseDouble(subRow.get(startColNum + 3)));
             } else {
                 dayData.markDL.add(0.0);
                 dayData.priceL.add(0.0);
                 dayData.volumeL.add(0.0);
-                dayData.tickL.add(0);
+                dayData.tickL.add(0.0);
             }
         }
 

@@ -1,36 +1,46 @@
 package Indicators;
 
 import Objects.DayData;
+import Objects.IndicatorColumn;
+import Objects.IndicatorDetails;
+import Objects.IndicatorDetailsArray;
 
 import java.util.ArrayList;
 
 import static Objects.DayData.calculatePCIBetween2Points;
 
-public class WinStrategies {
-    public static void calculate4To2WinStrategy(DayData dayData) {
-        dayData.tradeStrategy4To2 = calculateWinStrategy(dayData,0.04, -0.02);
-    }
+public class WinStrategy {
+    public static double calculateWinRatio(IndicatorDetails indicatorDetails, DayData dayData, Boolean onlyTrigger, IndicatorDetailsArray indicatorDetailsArray, int ifTrigger) {
+        double winPercentage = Double.parseDouble(String.valueOf(indicatorDetails.getParams().get(0)));
+        double lossPercentage = Double.parseDouble(String.valueOf(indicatorDetails.getParams().get(1)));
+        ArrayList<Double> array = new ArrayList<>();
+        if (onlyTrigger) {
+            double val = calculateWinStrategyByTypeAndStart(dayData, winPercentage, lossPercentage, ifTrigger);
+            return val;
+        } else {
+            array = calculateWinStrategy(dayData, winPercentage, lossPercentage);
+        }
 
-    public static void calculate10To2WinStrategy(DayData dayData) {
-        dayData.tradeStrategy10To2 = calculateWinStrategy(dayData,0.10, -0.02);
+        IndicatorColumn indicatorColumn = new IndicatorColumn(indicatorDetails.tagname, array);
+        dayData.indicatorColumnArray.add(indicatorColumn);
+        return 0;
     }
-
-    private static ArrayList<String> calculateWinStrategy(DayData dayData, double winPercentage, double lossPercentage) {
-        ArrayList<String> strategyL = new ArrayList<>();
+    private static ArrayList<Double> calculateWinStrategy(DayData dayData, double winPercentage, double lossPercentage) {
+        ArrayList<Double> strategyL = new ArrayList<>();
         for (int i = 0; i < dayData.priceL.size(); i++) {
             double iPrice = dayData.priceL.get(i);
             for (int j = i; j >=0; j--) {
                 double jPrice = dayData.priceL.get(j);
                 if (calculatePCIBetween2Points(jPrice, iPrice) > winPercentage) {
-                    strategyL.add("1");
+                    strategyL.add(1.0);
                     break;
                 }
                 if (calculatePCIBetween2Points(jPrice, iPrice) < lossPercentage) {
-                    strategyL.add("0");
+                    strategyL.add(0.0);
                     break;
                 }
                 if (j == 0) {
-                    strategyL.add("No Movement");
+                    strategyL.add(-9999.0);
                     break;
                 }
             }
@@ -53,6 +63,4 @@ public class WinStrategies {
         }
         return success;
     }
-
-
 }

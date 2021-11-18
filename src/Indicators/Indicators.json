@@ -1,0 +1,118 @@
+{
+  "indicatorDetailsArrayList": [
+    {
+      "tagname": "volume5Second",
+      "indicatortype": "difference",
+      "dependencies": [
+
+      ],
+      "params": [
+        0.0,
+        5.0
+      ],
+      "primetype": "volume",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "tick5Second",
+      "indicatortype": "difference",
+      "dependencies": [
+
+      ],
+      "params": [
+        0.0,
+        5.0
+      ],
+      "primetype": "tick",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "tick2Second",
+      "indicatortype": "difference",
+      "dependencies": [
+
+      ],
+      "params": [
+        0.0,
+        2.0
+      ],
+      "primetype": "tick",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "volume2Second",
+      "indicatortype": "difference",
+      "dependencies": [
+
+      ],
+      "params": [
+        0.0,
+        2.0
+      ],
+      "primetype": "volume",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "PCI1Second",
+      "indicatortype": "PCIChange",
+      "dependencies": [
+
+      ],
+      "params": [
+        0.0,
+        1.0
+      ],
+      "primetype": "price",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "4% - 2%",
+      "indicatortype": "winRatio",
+      "dependencies": [
+
+      ],
+      "params": [
+        0.04,
+        -0.02
+      ],
+      "primetype": "price",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "2% - 1%",
+      "indicatortype": "winRatio",
+      "dependencies": [
+      ],
+      "params": [
+        0.02,
+        -0.01
+      ],
+      "primetype": "price",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "10% - 5%",
+      "indicatortype": "winRatio",
+      "dependencies": [
+      ],
+      "params": [
+        0.10,
+        -0.05
+      ],
+      "primetype": "price",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "50% - 5%",
+      "indicatortype": "winRatio",
+      "dependencies": [
+      ],
+      "params": [
+        0.50,
+        -0.05
+      ],
+      "primetype": "price",
+      "extra": "extra val"
+    }
+  ]
+}

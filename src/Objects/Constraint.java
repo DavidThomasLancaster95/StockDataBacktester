@@ -1,11 +1,11 @@
 package Objects;
 
-public class SimpleParameter{
+public class Constraint {
     public String headerName;
     public double min;
     public double max;
 
-    public SimpleParameter(String headerName, double min, double max) {
+    public Constraint(String headerName, double min, double max) {
         this.headerName = headerName;
         this.min = min;
         this.max = max;

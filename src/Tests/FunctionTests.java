@@ -1,8 +1,17 @@
 package Tests;
 
+import Backtesting.TriggerModler;
+import Objects.Constraint;
 import Objects.DayData;
+import Objects.IndicatorDetailsArray;
+import com.google.gson.Gson;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static ExcelCommunication.ExcelCommunicator.getCSV2;
@@ -14,7 +23,8 @@ public class FunctionTests {
     public String mHomeDirectory;
     private String mProgramSettingsURL;
     private DayData dayData;
-
+    private IndicatorDetailsArray indicatorDetailsArray;
+    private ArrayList<String> headerArray;
     // function arrays
 
 
@@ -25,93 +35,56 @@ public class FunctionTests {
         String subFileUrl = mHomeDirectory + "\\DataAsCSV\\" + day + "\\D" + 1 + day + ".csv";
         List<List<String>> records = getCSV2(subFileUrl);
         dayData = getStockByNumber(records, 1);
+        headerArray = new ArrayList<>();
 
+        TriggerModler triggerModler = new TriggerModler(mHomeDirectory, "output1.csv", "parameters.txt");
+        indicatorDetailsArray = triggerModler.indicatorDetailsArray;
+    }
 
+    public void initiateAllIndicators() {
+        ArrayList<Constraint> constraintList = new ArrayList<>();
+
+        headerArray.add("volume5Second");
+        headerArray.add("tick5Second");
+        headerArray.add("tick2Second");
+        headerArray.add("volume2Second");
+        headerArray.add("PCI1Second");
+
+        for (String head: headerArray) {
+            constraintList.add(new Constraint(head, 1, 1));
+        }
+
+        dayData.initiateSecondaryIndicators(constraintList, indicatorDetailsArray);
+
+        System.out.println("finisehd initiating indicators");
 
     }
 
-
-
-    public void testFunctions() {
-
-    }
-
-    public void printArrays() {
+    public void printAllIndicators() {
         StringBuilder sb = new StringBuilder();
 
+        // print the headers
         sb.append("\n\n\n");
-        sb.append("MarkD," + "Price," + "Volume," + "Ticks," + "PCI,," + "VolumeSeconds,," + "4% - 2%,," + "MinuteTicks,," + "TickSeconds,,"
-                + "PCI Minute,," + "Volume30MinutesBefore5,," + "PriceSpread30MinutePCIPre5,," + "MovingAverage5By5,," + "4To2FluctuationSum,,"
-                + "PointHighSumArray,," + "tick15Second,," + "volume15Second,," + "PCI15Second,," + "win4To2Fluctuation,," +
-                "pointHighArray,," + "volumeMinute,," + "\n");
+        sb.append("time," + "markD," + "price," + "volume," + "ticks,");
+        headerArray.forEach(x -> sb.append(x + ",,"));
+        sb.append("\n");
 
-        //dayData.calculatePCI();
-        Indicators.PCI.calculatePCI(dayData);
-        //dayData.calculateVolumeSeconds();
-        Indicators.Volume.calculateVolumeSeconds(dayData);
-        //dayData.calculate4To2WinStrategy();
-        Indicators.WinStrategies.calculate4To2WinStrategy(dayData);
-        //dayData.calculateMinuteTicks();
-        Indicators.Tick.calculateMinuteTicks(dayData);
-        //dayData.calculateTickSeconds();
-        Indicators.Tick.calculateTickSeconds(dayData);
-        //dayData.calculatePCIMinute();
-        Indicators.PCI.calculatePCIMinute(dayData);
-        //dayData.calculateVolume30MinutesBefore5();
-        Indicators.Volume.calculateVolume30MinutesBefore5(dayData);
-        //dayData.calculatePriceSpread30MinutePCIPre5();
-        Indicators.PriceSpreads.calculatePriceSpread30MinutePCIPre5(dayData);
-        //dayData.calculateMovingAverage5By5();
-        Indicators.MovingAverages.calculateMovingAverage5By5(dayData);
-        //dayData.calculateWin4To2FluctuationSum();
-        Indicators.FluctuationSum.calculateWin4To2FluctuationSum(dayData);
-        //dayData.calculatePointHighSumArray();
-        Indicators.PointHigh.calculatePointHighSumArray(dayData);
-        //dayData.calculateTick15Second();
-        Indicators.Tick.calculateTick15Second(dayData);
-        //dayData.calculateVolume15Second();
-        Indicators.Volume.calculateVolume15Second(dayData);
-        //dayData.calculatePCI15Second();
-        Indicators.PCI.calculatePCI15Second(dayData);
-        //dayData.calculateWin4To2FluctuationSum();
-        Indicators.FluctuationSum.calculateWin4To2FluctuationSum(dayData);
-        //dayData.calculatePointHighArray();
-        Indicators.PointHigh.calculatePointHighArray(dayData);
-        //dayData.calculateVolumeMinute();
-        Indicators.Volume.calculateVolumeMinute(dayData);
-        //dayData.calculatePCI15Second();
-        Indicators.PCI.calculatePCI15Second(dayData);
-
-
-
+        // now we print all the lines.
         for (int i = 0; i < dayData.markDL.size(); i++) {
+            // add the stupid header values
+            sb.append(i + ",");
             sb.append(dayData.markDL.get(i) + ",");
             sb.append(dayData.priceL.get(i) + ",");
             sb.append(dayData.volumeL.get(i) + ",");
             sb.append(dayData.tickL.get(i) + ",");
-            sb.append(dayData.PCI.get(i) + ",,");
-            sb.append(dayData.volumeSeconds.get(i) + ",,");
-            sb.append(dayData.tradeStrategy4To2.get(i) + ",,");
-            sb.append(dayData.tickMinute.get(i) + ",,");
-            sb.append(dayData.tickSeconds.get(i) + ",,");
-            sb.append(dayData.PCIMinute.get(i) + ",,");
-            sb.append(dayData.volume30MinutesBefore5.get(i) + ",,");
-            sb.append(dayData.priceSpread30MinutePCIPre5.get(i) + ",,");
-            sb.append(dayData.movingAverage5By5.get(i) + ",,");
-            sb.append(dayData.win4To2FluctuationSum.get(i) + ",,");
-            sb.append(dayData.pointHighSumArray.get(i) + ",,");
-            sb.append(dayData.tick15Second.get(i) + ",,");
-            sb.append(dayData.volume15Second.get(i) + ",,");
-            sb.append(dayData.PCI15Second.get(i) + ",,");
-            sb.append(dayData.win4To2Fluctuation.get(i) + ",,");
-            sb.append(dayData.pointHighArray.get(i) + ",,");
-            sb.append(dayData.volumeMinute.get(i) + ",,");
-
+            // how add all the written indicators
+            final int j = i;
+            dayData.indicatorColumnArray.forEach(x -> sb.append(x.valueColumn.get(j) + ",,"));
 
             sb.append("\n");
         }
-        printSBToOutput(sb);
 
+        printSBToOutput(sb);
     }
 
     public void printSBToOutput(StringBuilder sb) {
@@ -136,4 +109,6 @@ public class FunctionTests {
             ioe.printStackTrace();
         }
     }
+
+
 }
