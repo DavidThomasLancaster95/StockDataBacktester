@@ -41,6 +41,12 @@ public class UniversalIndicator {
         if (indicatorType.equals("winRatio")) {
             returnVal = WinStrategy.calculateWinRatio(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
         }
+        if (indicatorType.equals("timeRange")) {
+            returnVal = SetTimeRangeStrategy.calculateTimeRangeStrategy(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
+        if (indicatorType.equals("movingAverage")) {
+            returnVal = MovingAverageStrategy.calculateMovingAverageStrategy(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
 
         //...
         return returnVal;

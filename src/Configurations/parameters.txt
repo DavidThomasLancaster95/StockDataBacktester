@@ -1,4 +1,4 @@
-volume5Second,volume2Second,tick5Second,tick2Second,PCI1Second,4% - 2%,2% - 1%,10% - 5%,50% - 5%,markD,volumeDay,tickDay,price
+volume5Second,volume2Second,tick5Second,tick2Second,PCI1Second,4% - 2%,2% - 1%,10% - 5%,50% - 5%,markD,volumeDay,tickDay,price,firstHourVolumeSum,movingAverage5MinBy1Sec
 time,0,24301
 markD,0.1,1
 volume2Second,5000,9999999

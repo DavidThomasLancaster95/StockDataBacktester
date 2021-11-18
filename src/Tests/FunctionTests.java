@@ -49,6 +49,10 @@ public class FunctionTests {
         headerArray.add("tick2Second");
         headerArray.add("volume2Second");
         headerArray.add("PCI1Second");
+        headerArray.add("volume10SecondBefore10Second");
+        headerArray.add("firstHourVolumeSum");
+        headerArray.add("movingAverage5MinBy1Sec");
+
 
         for (String head: headerArray) {
             constraintList.add(new Constraint(head, 1, 1));

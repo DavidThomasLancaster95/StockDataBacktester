@@ -53,6 +53,19 @@
       "extra": "extra val"
     },
     {
+      "tagname": "volume10SecondBefore10Second",
+      "indicatortype": "difference",
+      "dependencies": [
+
+      ],
+      "params": [
+        10.0,
+        20.0
+      ],
+      "primetype": "volume",
+      "extra": "extra val"
+    },
+    {
       "tagname": "PCI1Second",
       "indicatortype": "PCIChange",
       "dependencies": [
@@ -63,6 +76,32 @@
         1.0
       ],
       "primetype": "price",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "firstHourVolumeSum",
+      "indicatortype": "timeRange",
+      "dependencies": [
+
+      ],
+      "params": [
+        24301,
+        27901
+      ],
+      "primetype": "volume",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "movingAverage5MinBy1Sec",
+      "indicatortype": "movingAverage",
+      "dependencies": [
+
+      ],
+      "params": [
+        300,
+        1
+      ],
+      "primetype": "na",
       "extra": "extra val"
     },
     {
