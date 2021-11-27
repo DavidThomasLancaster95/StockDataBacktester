@@ -52,7 +52,14 @@ public class FunctionTests {
         headerArray.add("volume10SecondBefore10Second");
         headerArray.add("firstHourVolumeSum");
         headerArray.add("movingAverage5MinBy1Sec");
-
+        headerArray.add("movingAverage10MinBy1Sec");
+        headerArray.add("movingAverage60MinBy1Sec");
+        headerArray.add("FirstHourHigh");
+        headerArray.add("AboveFirstHourPrice");
+        headerArray.add("MovingAverageChangeBinary");
+        headerArray.add("DifFrom60MinMovingAverage");
+        headerArray.add("60-10CrossOver");
+        headerArray.add("AveragePCI");
 
         for (String head: headerArray) {
             constraintList.add(new Constraint(head, 1, 1));

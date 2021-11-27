@@ -47,6 +47,27 @@ public class UniversalIndicator {
         if (indicatorType.equals("movingAverage")) {
             returnVal = MovingAverageStrategy.calculateMovingAverageStrategy(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
         }
+        if (indicatorType.equals("priceChangeHiLoChange")) {
+            returnVal = PriceChangeHiLoStrategy.calculatePriceChangeHiLo(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
+        if (indicatorType.equals("priceHiOrLoRange")) {
+            returnVal = PriceHiOrLoRangeStrategy.calculatePriceHiOrLo(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
+        if (indicatorType.equals("aboveOrBelowPriceRange")) {
+            returnVal = AboveOrBelowPriceRangeStrategy.calculateAboveOrBelowPriceRange(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
+        if (indicatorType.equals("movingAverageBinary")) {
+            returnVal = MovingAverageStrategy.calculateMovingAverageChangeDirectionBinaryStrategy(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
+        if (indicatorType.equals("difFromMovingAverage")) {
+            returnVal = MovingAverageStrategy.calculatePercentageDifFromMovingAverage(indicatorDetails, dayData, onlyTrigger,indicatorDetailsArray, ifTrigger);
+        }
+        if (indicatorType.equals("movingAverageCrossOver")) {
+            returnVal = MovingAverageStrategy.calculateMovingAverageCrossover(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
+        if (indicatorType.equals("averagePCI")) {
+            returnVal = AveragePCIStrategy.calculateAveragePCI(indicatorDetails, dayData, onlyTrigger, indicatorDetailsArray, ifTrigger);
+        }
 
         //...
         return returnVal;
@@ -78,7 +99,8 @@ public class UniversalIndicator {
         IndicatorDetails indicatorDetails = indicatorDetailsArray.getIndicatorDetailsByTagName(head);
         for (String dependency: indicatorDetails.dependencies) {
             // check if the dependency is already generated.
-            if (dayData.getIndicatorColumnByName(head).valueColumn == null) {
+
+            if (dayData.getIndicatorColumnByName(head)/*.valueColumn*/ == null) {
                 IndicatorDetails dependencyIndicatorDetails = indicatorDetailsArray.getIndicatorDetailsByTagName(dependency);
                 processIndicator(dependencyIndicatorDetails, dayData, false, indicatorDetailsArray, 0);
             }

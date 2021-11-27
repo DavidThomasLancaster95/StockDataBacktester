@@ -205,6 +205,7 @@ public class TriggerModler {
 
             boolean wasPrime = false;
             if (indicatorColumn == null) {
+                // check if it is a special prime value
                 switch (constraint.headerName) {
                     case "time":
                         if (index > constraint.max) return false;

@@ -122,10 +122,10 @@ public class DayData {
             return new IndicatorColumn("price", this.priceL);
         }
         if (name.equals("tickDay")) {
-            return new IndicatorColumn("tick", this.priceL);
+            return new IndicatorColumn("tick", this.tickL);
         }
         if (name.equals("volumeDay")) {
-            return new IndicatorColumn("volume", this.priceL);
+            return new IndicatorColumn("volume", this.volumeL);
         }
         for (IndicatorColumn indicatorColumn: indicatorColumnArray) {
             if (indicatorColumn.indicatorHeadName.equals(name)) {

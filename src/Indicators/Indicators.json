@@ -105,6 +105,32 @@
       "extra": "extra val"
     },
     {
+      "tagname": "movingAverage10MinBy1Sec",
+      "indicatortype": "movingAverage",
+      "dependencies": [
+
+      ],
+      "params": [
+        600,
+        1
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "movingAverage60MinBy1Sec",
+      "indicatortype": "movingAverage",
+      "dependencies": [
+
+      ],
+      "params": [
+        3600,
+        1
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
       "tagname": "4% - 2%",
       "indicatortype": "winRatio",
       "dependencies": [
@@ -151,6 +177,108 @@
         -0.05
       ],
       "primetype": "price",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "FirstHourHigh",
+      "indicatortype": "priceHiOrLoRange",
+      "dependencies": [
+      ],
+      "params": [
+        24301.0,
+        27901.0,
+        1.0
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "FirstHourPriceRange",
+      "indicatortype": "priceChangeHiLoChange",
+      "dependencies": [
+      ],
+      "params": [
+        24301.0,
+        27901.0,
+        2.0
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "AboveFirstHourPrice",
+      "indicatortype": "aboveOrBelowPriceRange",
+      "dependencies": [
+        "FirstHourHigh"
+      ],
+      "params": [
+        1.0
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "BelowFirstHourPrice",
+      "indicatortype": "aboveOrBelowPriceRange",
+      "dependencies": [
+        "FirstHourHigh"
+      ],
+      "params": [
+        2.0
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "MovingAverageChangeBinary",
+      "indicatortype": "movingAverageBinary",
+      "dependencies": [
+        "movingAverage5MinBy1Sec"
+      ],
+      "params": [
+
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "DifFrom60MinMovingAverage",
+      "indicatortype": "difFromMovingAverage",
+      "dependencies": [
+        "movingAverage60MinBy1Sec"
+      ],
+      "params": [
+
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "60-10CrossOver",
+      "indicatortype": "movingAverageCrossOver",
+      "dependencies": [
+        "movingAverage60MinBy1Sec",
+        "movingAverage10MinBy1Sec"
+      ],
+      "params": [
+        1
+      ],
+      "primetype": "na",
+      "extra": "extra val"
+    },
+    {
+      "tagname": "AveragePCI",
+      "indicatortype": "averagePCI",
+      "dependencies": [
+        "PCI1Second"
+      ],
+      "params": [
+        0,
+        5,
+        1,
+        1
+      ],
+      "primetype": "na",
       "extra": "extra val"
     }
   ]

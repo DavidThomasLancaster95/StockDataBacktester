@@ -1,6 +1,3 @@
-volume5Second,volume2Second,tick5Second,tick2Second,PCI1Second,4% - 2%,2% - 1%,10% - 5%,50% - 5%,markD,volumeDay,tickDay,price,firstHourVolumeSum,movingAverage5MinBy1Sec
+volume5Second,volume2Second,tick5Second,tick2Second,PCI1Second,4% - 2%,2% - 1%,10% - 5%,50% - 5%,markD,volumeDay,tickDay,price,firstHourVolumeSum,movingAverage5MinBy1Sec,FirstHourHigh,FirstHourPriceRange,AboveFirstHourPrice,BelowFirstHourPrice
 time,0,24301
-markD,0.1,1
-volume2Second,5000,9999999
-tick2Second,2,999
-PCI1Second,0.01,1
+60-10CrossOver,1,1
